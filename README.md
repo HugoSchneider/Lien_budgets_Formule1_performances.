@@ -1,169 +1,117 @@
-🏎️ Projet d'Économétrie 2024 – F1 : Budget & Performance
+# 🏎️ Projet d'Économétrie 2024 – F1 : Budget & Performance
 
-Auteurs : Hugo Schneider, Lola Carpentier, Ugo Corbari
-Date de rendu : 12 décembre 2024
-Cours : Économétrie - M1 APE
+**Auteurs :** Hugo Schneider, Lola Carpentier, Ugo Corbari  
+**Date de rendu :** 12 décembre 2024  
+**Cours :** Économétrie - M1 APE  
 
-🎯 Objectif du projet
+---
 
-Ce projet vise à étudier la relation entre le budget annuel des écuries de Formule 1 et leur performance sportive sur la période 2010 à 2022. L’objectif principal est de déterminer si un lien économétrique existe entre les dépenses engagées et le nombre de points marqués dans le championnat du monde de Formule 1.
+## 🎯 Objectif du projet
 
-Nous avons ainsi tenté de répondre à la question suivante :
+Ce projet vise à étudier la relation entre le **budget annuel des écuries de Formule 1** et leur **performance sportive** sur la période **2010 à 2022**.  
+L’objectif principal est de déterminer si un lien économétrique existe entre les **dépenses engagées** et le **nombre de points** marqués dans le championnat du monde de F1.
 
-"Les écuries les mieux financées sont-elles systématiquement les plus performantes ?"
-🧾 Données
+> 🧐 *Les écuries les mieux financées sont-elles systématiquement les plus performantes ?*
 
-Source principale :
-Site officiel de la Formula 1
-Estimations de Sportune.fr
-Période couverte : 2010 à 2022
-Échantillon : 10 principales écuries du championnat, soit 98 observations
-📌 Variables principales :
+---
 
-Variable	Description
-Points	Points obtenus en fin de saison
-Budget	Budget annuel en M€ (log-transformé pour l’analyse)
-Pole	Nombre de pole positions obtenues par saison
-Time	Temps moyen aux stands (en secondes)
-Salariés	Nombre d’employés dans l’écurie
-Specs	Spécificité technique (indice synthétique)
-📊 Méthodologie
+## 📊 Données
 
-🔧 Modèles estimés :
-MCO simple :
-Points
-=
-β
-0
-+
-β
-1
-log
-⁡
-(
-Budget
-)
-+
-ϵ
-Points=β 
-0
-​	
- +β 
-1
-​	
- log(Budget)+ϵ
-Résultat : 
-R
-2
-=
-0.284
-R 
-2
- =0.284
-MCO multiple avec variables de contrôle :
-Points
-=
-β
-0
-+
-β
-1
-log
-⁡
-(
-Budget
-)
-+
-β
-2
-Salari
-e
-ˊ
-s
-+
-β
-3
-Pole
-+
-β
-4
-Time
-+
-β
-5
-Specs
-+
-ϵ
-Points=β 
-0
-​	
- +β 
-1
-​	
- log(Budget)+β 
-2
-​	
- Salari 
-e
-ˊ
- s+β 
-3
-​	
- Pole+β 
-4
-​	
- Time+β 
-5
-​	
- Specs+ϵ
-Résultat : 
-R
-a
-j
-u
-s
-t
-e
-ˊ
-2
-=
-0.780
-R 
-ajust 
-e
-ˊ
- 
-2
-​	
- =0.780
-GLS (Moindres Carrés Généralisés) pour corriger l’autocorrélation
-Corrige l’erreur structurelle temporelle détectée dans les tests Durbin-Watson
-🧪 Tests économétriques
-Homoscédasticité : test de Breusch-Pagan
-➤ Aucun problème détecté (p > 0.2)
-Autocorrélation : test de Durbin-Watson
-➤ Présence d’autocorrélation importante (DW ≈ 0.7, p < 10⁻¹²)
-📈 Résultats et interprétations
+### 🔗 Sources :
+- [Formula 1 – Résultats officiels](https://www.formula1.com)
+- [Sportune – Estimations budgétaires](https://www.sportune.fr)
 
-Budget seul : effet significatif dans le modèle simple, mais devient non significatif dans le modèle enrichi.
-Variables significatives (p < 0.01) :
-Nombre de salariés : effet positif robuste
-Pole positions : effet très fortement corrélé aux performances
-Temps moyen aux stands et spectateurs : effets non significatifs
-Modèle GLS : confirme les effets observés mais ne corrige pas totalement l’autocorrélation (DW = 0.66)
-📉 Visualisations clés
+### 📅 Période :
+- 2010 à 2022
 
-Graphique Budget vs Points :
-➤ Forte hétérogénéité des résultats à budget équivalent, surtout entre 150–200 M€
-➤ Dispersion importante qui suggère l’importance de facteurs non observés
-⚠️ Limites du projet
+### 🔢 Échantillon :
+- 10 écuries
+- 98 observations
 
-Autocorrélation persistante dans les résidus, même après GLS
-Accès limité aux données internes (stratégies d’upgrade, profils des ingénieurs)
-Possibles variables omises (qualité des pilotes, météo, incidents)
-📚 Conclusion
+### 🧾 Variables utilisées :
 
-Les résultats de notre étude remettent en question l’idée reçue selon laquelle un gros budget garantit automatiquement de meilleures performances.
+| Variable       | Description                                              |
+|----------------|----------------------------------------------------------|
+| `Points`       | Points marqués par l'écurie en fin de saison             |
+| `Budget`       | Budget annuel en millions d’euros (log-transformé)      |
+| `Pole`         | Nombre de pole positions obtenues                        |
+| `Time`         | Temps moyen aux stands (en secondes)                    |
+| `Salariés`     | Nombre d’employés par écurie                             |
+| `Specs`        | Indice synthétique de spécificité technique              |
 
-✅ Ce sont les compétences humaines et la stratégie (pole positions), plus que le seul budget, qui expliquent la réussite des écuries.
-Ce projet ouvre la voie à des recherches intégrant des modèles dynamiques, des effets fixes par équipe, ou des données plus qualitatives sur les ressources internes.
+---
+
+## 🧠 Méthodologie
+
+### 🔧 Modèles estimés
+
+1. **MCO simple :**  
+   `Points = β₀ + β₁ · log(Budget) + ε`  
+   Résultat : R² = 0.284
+
+2. **MCO multiple avec variables de contrôle :**  
+   `Points = β₀ + β₁ · log(Budget) + β₂ · Salariés + β₃ · Pole + β₄ · Time + β₅ · Specs + ε`  
+   Résultat : R² ajusté = 0.780
+
+3. **GLS – Moindres carrés généralisés**  
+   Objectif : corriger l’autocorrélation temporelle détectée
+
+---
+
+## 🧪 Tests économétriques
+
+| Test                  | Résultat                              |
+|-----------------------|----------------------------------------|
+| Breusch-Pagan         | Pas d’hétéroscédasticité (p > 0.2)     |
+| Durbin-Watson         | Autocorrélation détectée (DW ≈ 0.7)    |
+
+---
+
+## 📈 Résultats principaux
+
+- Le **budget seul** explique une part modeste de la performance.
+- Le **modèle enrichi** indique que :
+  - Le **nombre de salariés** est fortement significatif (p < 0.01)
+  - Le **nombre de pôles positions** est le facteur le plus explicatif
+  - Le **budget** perd en significativité dans ce modèle
+- Le **temps aux stands** et les **spectateurs** n’ont pas d’effet statistique significatif
+- La **correction GLS** confirme les tendances mais ne résout pas totalement l’autocorrélation
+
+---
+
+## 📉 Visualisation
+
+- **Graphique Budget vs Points :**  
+  Montre une forte **dispersion** des points à budget équivalent, particulièrement entre 150 et 200 M€.  
+  Cela suggère des **facteurs non observés** influençant fortement les performances.
+
+---
+
+## ⚠️ Limites
+
+- **Autocorrélation persistante** même après correction GLS
+- **Accès restreint** aux données internes des écuries (profil des ingénieurs, innovations)
+- **Variables omises** possibles (qualité des pilotes, incidents en course, météo)
+
+---
+
+## 📚 Conclusion
+
+Les résultats remettent en cause l’idée selon laquelle un plus grand budget garantit de meilleures performances.
+
+> ✅ **Ce sont les choix stratégiques et humains qui comptent plus que le simple budget.**
+
+Une analyse plus poussée avec des données qualitatives et des modèles dynamiques permettrait d’affiner cette conclusion.
+
+---
+
+## 🛠️ Stack technique
+
+- **Langage** : R
+- **Packages** : `dplyr`, `ggplot2`, `lmtest`, `nlme`, `car`
+- **Sortie** : HTML via RMarkdown
+
+---
+
+## 📁 Structure du projet
+
