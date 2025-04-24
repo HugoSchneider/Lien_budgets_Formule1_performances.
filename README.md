@@ -103,15 +103,5 @@ Les résultats remettent en cause l’idée selon laquelle un plus grand budget 
 
 Une analyse plus poussée avec des données qualitatives et des modèles dynamiques permettrait d’affiner cette conclusion.
 
----
 
-## 🛠️ Stack technique
-
-- **Langage** : R
-- **Packages** : `dplyr`, `ggplot2`, `lmtest`, `nlme`, `car`
-- **Sortie** : HTML via RMarkdown
-
----
-
-## 📁 Structure du projet
 
